@@ -1,0 +1,37 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/data_prep.py
+    deps:
+    - path: data/raw
+      hash: md5
+      md5: b2c461b1b0bcb7a0a2318d5be1f13758.dir
+      size: 866190740
+      nfiles: 25002
+    - path: src/data_prep.py
+      hash: md5
+      md5: 6303d18694afe11417e6e500709c8b20
+      size: 2411
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: fb50443d750c545c540d66c2b7c870ca.dir
+      size: 99704565
+      nfiles: 24998
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: fb50443d750c545c540d66c2b7c870ca.dir
+      size: 99704565
+      nfiles: 24998
+    - path: src/train.py
+      hash: md5
+      md5: 225c7341befabfdd13e2ff00e87677ac
+      size: 1797
+    outs:
+    - path: models/model.keras
+      hash: md5
+      md5: e628479f622f1bec4be242ff332e77a5
+      size: 88748971
