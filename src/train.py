@@ -5,14 +5,30 @@ import keras
 from keras import layers, models, optimizers
 
 
+import yaml
+
+# Load parameters
+with open("params.yaml") as f:
+    params = yaml.safe_load(f)
+
+
 
 # Define paths
 PROCESSED_DIR = "data/processed"
 MODEL_DIR = "models"
 MODEL_PATH = os.path.join(MODEL_DIR, "model.keras")
+
+IMG_SIZE = (params["prepare"]["img_size"], params["prepare"]["img_size"])
+BATCH_SIZE = params["train"]["batch_size"]
+EPOCHS = params["train"]["epochs"]
+
+
+"""
 IMG_SIZE = (128, 128)
 BATCH_SIZE = 32
 EPOCHS = 5  # Keep it small for testing the pipeline
+"""
+
 
 def build_model():
     """Builds a simple Convolutional Neural Network."""

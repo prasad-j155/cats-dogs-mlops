@@ -1,11 +1,16 @@
 import os
 from PIL import Image
 from sklearn.model_selection import train_test_split
+import yaml
 
+# Load parameters
+with open("params.yaml") as f:
+    params = yaml.safe_load(f)
 # Define our static paths and variables
 RAW_DIR = "data/raw"
 PROCESSED_DIR = "data/processed"
-IMG_SIZE = 128  # Neural networks need uniform input sizes
+IMG_SIZE = params["prepare"]["img_size"]
+#IMG_SIZE = 128  # Neural networks need uniform input sizes
 
 def process_and_split():
     categories = ["Cat", "Dog"]

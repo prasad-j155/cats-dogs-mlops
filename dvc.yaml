@@ -4,6 +4,8 @@ stages:
     deps:
       - src/data_prep.py
       - data/raw
+    params:
+      - prepare.img_size
     outs:
       - data/processed
 
@@ -12,5 +14,9 @@ stages:
     deps:
       - src/train.py
       - data/processed
+    params:
+      - prepare.img_size
+      - train.batch_size
+      - train.epochs
     outs:
       - models/model.keras

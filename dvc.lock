@@ -10,8 +10,11 @@ stages:
       nfiles: 25002
     - path: src/data_prep.py
       hash: md5
-      md5: 6303d18694afe11417e6e500709c8b20
-      size: 2411
+      md5: 57e29de958f732737bdbe8e34cf5ca51
+      size: 2550
+    params:
+      params.yaml:
+        prepare.img_size: 128
     outs:
     - path: data/processed
       hash: md5
@@ -28,10 +31,15 @@ stages:
       nfiles: 24998
     - path: src/train.py
       hash: md5
-      md5: 225c7341befabfdd13e2ff00e87677ac
-      size: 1797
+      md5: 0a4cf6981e2d53749853ceb87cbd4d1e
+      size: 2072
+    params:
+      params.yaml:
+        prepare.img_size: 128
+        train.batch_size: 32
+        train.epochs: 3
     outs:
     - path: models/model.keras
       hash: md5
-      md5: e628479f622f1bec4be242ff332e77a5
+      md5: c24ea033892f5c8fb0d273192069f4b4
       size: 88748971

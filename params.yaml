@@ -1,0 +1,6 @@
+prepare:
+  img_size: 128
+
+train:
+  batch_size: 32
+  epochs: 3
