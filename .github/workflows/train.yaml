@@ -42,5 +42,24 @@ jobs:
       - name: Run ML Pipeline
         run: dvc repro
 
-      - name: Show Final Metrics
-        run: cat metrics.json
+
+      # --- NEW CML STEPS BELOW ---
+      
+      - name: Setup CML
+        uses: iterative/setup-cml@v2
+
+      - name: Create and Post CML Report
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 1. Create a beautiful Markdown report
+          echo "## 📊 Model Training Results" > report.md
+          echo "Here are the final metrics for the latest model:" >> report.md
+          
+          # 2. Add the JSON metrics into a code block
+          echo "\`\`\`json" >> report.md
+          cat metrics.json >> report.md
+          echo "\`\`\`" >> report.md
+          
+          # 3. Tell CML to post this report as a GitHub comment!
+          cml comment create report.md
