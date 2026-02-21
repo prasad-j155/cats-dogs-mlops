@@ -20,3 +20,6 @@ stages:
       - train.epochs
     outs:
       - models/model.keras
+    metrics:             # <-- Add this block
+      - metrics.json:    # <-- Tell DVC this is a metrics file, not just a standard output
+          cache: false   # <-- Keep it in the workspace so Git can track it easily

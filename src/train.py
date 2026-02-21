@@ -1,6 +1,6 @@
 import os
 import tensorflow as tf
-
+import json
 import keras
 from keras import layers, models, optimizers
 
@@ -67,8 +67,23 @@ def train():
     model = build_model()
     
     print("Starting training...")
-    model.fit(train_dataset, validation_data=val_dataset, epochs=EPOCHS)
+    # Capture the training history
+    history = model.fit(train_dataset, validation_data=val_dataset, epochs=EPOCHS)
     
+    # Extract the final epoch's validation metrics
+    val_accuracy = history.history['val_accuracy'][-1]
+    val_loss = history.history['val_loss'][-1]
+
+    # Save metrics to a JSON file
+    metrics = {
+        "accuracy": float(val_accuracy),
+        "loss": float(val_loss)
+    }
+    
+    with open("metrics.json", "w") as f:
+        json.dump(metrics, f, indent=4)
+    print("Metrics saved to metrics.json")
+
     print(f"Saving model to {MODEL_PATH}...")
     os.makedirs(MODEL_DIR, exist_ok=True)
     model.save(MODEL_PATH)
