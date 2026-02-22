@@ -3,6 +3,9 @@ name: Train ML Pipeline
 on: 
   push:
     branches: [ "main", "master" ] # Runs when you push to the main branch
+    
+  pull_request:
+    branches: [ "main", "master" ]
 
 jobs:
   train-model:
