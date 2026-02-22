@@ -3,4 +3,4 @@ prepare:
 
 train:
   batch_size: 32
-  epochs: 3
+  epochs: 4
